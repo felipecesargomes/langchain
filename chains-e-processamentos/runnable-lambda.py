@@ -5,3 +5,4 @@ def parse_number(text:str) -> int:
 parse_number_runnable = RunnableLambda(parse_number)
 
 number = parse_number_runnable.invoke("10")
+
