@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain.chains.summarize import load_summarize_chain
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -27,11 +28,8 @@ LangChain facilita a criação de pipelines complexos de processamento de lingua
 splitter = RecursiveCharacterTextSplitter(chunk_size=250, chunk_overlap=70)
 parts = splitter.create_documents([long_text])
 
-# A abordagem "stuff" simplesmente agrupa todo o conteúdo em uma String.
-# Podemos simular o mesmo comportamento de 'load_summarize_chain' assim:
-combined_text = "\n\n".join(doc.page_content for doc in parts)
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+chain_sumarize = load_summarize_chain(llm, chain_type="map_reduce", verbose=True)
 
-# Invocando a chain com o texto consolidado
-result = chain.invoke({"text": combined_text})
-
+result = chain_sumarize.invoke({"input_documents": parts})
 print(result)
