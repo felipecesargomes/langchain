@@ -1,0 +1,13 @@
+---
+references:
+  - "File: /chains-e-processamentos/chain2_revisao.py"
+generationTime: 2026-06-27T20:53:00.050Z
+---
+flowchart TD
+    A["Start: chain2_revisao.py"] --> B["load_dotenv()"]
+    B --> C["Initialize llm: ChatOpenAI"]
+    C --> D["Define question_template (PromptTemplate)"]
+    D --> E["Compose chain (question_template | llm)"]
+    E --> F["chain.invoke(name: 'Felipe')"]
+    F --> G["Print result.content"]
+    G --> H["End Script"]
