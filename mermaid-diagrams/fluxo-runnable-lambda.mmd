@@ -1,0 +1,26 @@
+flowchart LR
+    A["🚀 Start
+    ---
+    from langchain_core.runnables import RunnableLambda"]
+
+    B["🔧 parse_number"]
+
+    B_detail["def parse_number(text: str) -> int:
+        return int(text.strip())"]
+
+    C["⚙️ parse_number_runnable"]
+
+    C_detail["RunnableLambda(parse_number)
+    ---
+    envolve fn Python → vira Runnable
+    pode usar .invoke() e pipe |"]
+
+    D["▶️ Invoke
+    ---
+    parse_number_runnable.invoke('10')
+    ---
+    retorna int: 10"]
+
+    A --> B --> C --> D
+    B --> B_detail
+    C --> C_detail
