@@ -1,0 +1,56 @@
+flowchart LR
+    A["🚀 Start
+    ---
+    PromptTemplate
+    ChatOpenAI
+    StrOutputParser
+    load_dotenv"]
+
+    B["📝 template_translate"]
+    B_detail["PromptTemplate(
+      input_variables=['initial_text'],
+      template='Translate to English:
+               {initial_text}'
+    )"]
+
+    C["📝 template_summary"]
+    C_detail["PromptTemplate(
+      input_variables=['text'],
+      template='Summarize in 4 words:
+               {text}'
+    )"]
+
+    D["🤖 llm_en
+    ---
+    ChatOpenAI(
+      model='gpt-4o-mini',
+      temperature=0
+    )"]
+
+    E["🔗 translate chain
+    ---
+    template_translate | llm_en | StrOutputParser()
+    ---
+    StrOutputParser: AIMessage → str puro"]
+
+    F["🔗 pipeline
+    ---
+    {'text': translate} | template_summary | llm_en | StrOutputParser()
+    ---
+    {'text': translate} alimenta {text}
+    do template_summary com resultado
+    da tradução"]
+
+    G["▶️ Invoke
+    ---
+    pipeline.invoke({'initial_text':
+      'Langchain é um framework...'})"]
+
+    H["🖨️ print(result)
+    ---
+    str puro — sem .content
+    StrOutputParser já extraiu"]
+
+    A --> B --> C --> D --> E --> F --> G --> H
+    B --> B_detail
+    C --> C_detail
