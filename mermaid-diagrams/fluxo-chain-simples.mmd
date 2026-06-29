@@ -1,13 +1,40 @@
----
-references:
-  - "File: /chains-e-processamentos/chain2_revisao.py"
-generationTime: 2026-06-27T20:53:00.050Z
----
-flowchart TD
-    A["Start: chain2_revisao.py"] --> B["load_dotenv()"]
-    B --> C["Initialize llm: ChatOpenAI"]
-    C --> D["Define question_template (PromptTemplate)"]
-    D --> E["Compose chain (question_template | llm)"]
-    E --> F["chain.invoke(name: 'Felipe')"]
-    F --> G["Print result.content"]
-    G --> H["End Script"]
+flowchart LR
+    A["🚀 Start
+    ---
+    PromptTemplate
+    ChatOpenAI
+    chain
+    load_dotenv"]
+
+    B["⚙️ Initialize llm
+    ---
+    llm = ChatOpenAI(
+      model='gpt-4o-mini',
+      temperature=0
+    )"]
+
+    C["📝 question_template"]
+
+    C_detail["PromptTemplate(
+      input_variables=['name'],
+      template='Olá, eu sou {name}!
+               Conte uma poesia...'
+    )
+    ---
+    {name} substituído pelo valor real"]
+
+    D["🔗 Build chain
+    ---
+    chain = question_template | llm"]
+
+    E["▶️ Invoke
+    ---
+    chain.invoke({'name': 'Felipe'})"]
+
+    F["🖨️ result.content
+    ---
+    ChatOpenAI retorna AIMessage
+    .content extrai o texto"]
+
+    A --> B --> C --> D --> E --> F
+    C --> C_detail
