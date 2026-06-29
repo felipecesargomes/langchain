@@ -1,0 +1,44 @@
+flowchart LR
+    A["🚀 Start
+    ---
+    from langchain_core.runnables import chain
+    from langchain.prompts import PromptTemplate
+    from langchain_openai import ChatOpenAI
+    from dotenv import load_dotenv"]
+
+    B["⚙️ square"]
+
+    B_detail["@chain
+    def square(input: dict) -> dict:
+        return {'square_result': input['x']**2}"]
+
+    C["📝 template_square"]
+
+    C_detail["PromptTemplate(
+      input_variables=['square_result'],
+      template='O resultado do quadrado de
+               um número é {square_result}.
+               Explique em texto simples,
+               sem LaTeX ou fórmulas.'
+    )"]
+
+    D["🤖 llm
+    ---
+    ChatOpenAI(
+      model='gpt-4o-mini',
+      temperature=0.5
+    )"]
+
+    E["🔗 Build chain
+    ---
+    chain_square = square | template_square | llm"]
+
+    F["▶️ Invoke
+    ---
+    chain_square.invoke({'x': 5})"]
+
+    G["🖨️ result.content"]
+
+    A --> B --> C --> D --> E --> F --> G
+    B --> B_detail
+    C --> C_detail
