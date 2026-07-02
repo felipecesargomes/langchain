@@ -69,7 +69,7 @@ Pipeline direto: `PromptTemplate` monta prompt com `{name}` → `ChatOpenAI` ger
 
 Dois templates encadeados: traduz texto PT→EN via `translate` chain, depois resume em 4 palavras via `pipeline`. `StrOutputParser` converte `AIMessage` → `str` em cada etapa.
 
-![Fluxo Pipeline Processamento](mermaid-diagrams/langchain_translate_pipeline.png)
+![Fluxo Pipeline Processamento](mermaid-diagrams/fluxo-pipeline-processamento.png)
 
 | Passo | O que faz |
 |-------|-----------|
