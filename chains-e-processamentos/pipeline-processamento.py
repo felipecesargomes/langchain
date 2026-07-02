@@ -23,6 +23,3 @@ pipeline = {"text": translate} | template_summary | llm_en | StrOutputParser()
 result = pipeline.invoke({"initial_text": "Langchain é um framework para desenvolvimento de aplicações de IA."})
 
 print(result)
-
-
-
