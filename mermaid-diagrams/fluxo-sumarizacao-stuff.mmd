@@ -1,0 +1,11 @@
+graph TD
+    A[Texto Longo] --> B[RecursiveCharacterTextSplitter]
+    B --> C["Lista de Documentos (Chunks)"]
+    C --> D["Prompt Template (Stuff)"]
+    D --> E["LLM (gpt-4o-mini)"]
+    E --> F[Resumo Final]
+
+    subgraph "Processo Stuff"
+        D
+        E
+    end
