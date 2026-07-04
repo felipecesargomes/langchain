@@ -80,3 +80,33 @@ Dois templates encadeados: traduz texto PT→EN via `translate` chain, depois re
 | `StrOutputParser()` | Extrai texto do `AIMessage` — `print(result)` sem `.content` |
 
 **Ponto-chave:** `{"text": translate}` é um dict que mapeia a variável do próximo template para o output da sub-chain anterior.
+
+---
+
+## 5. Sumarização Stuff
+**Script:** `chains-e-processamentos/sumarizacao copy.py`
+
+Usa a estratégia `stuff`, que coloca todos os pedaços de documentos em um único prompt. Indicado para textos curtos.
+
+![Sumarização Stuff](mermaid-diagrams/text_summarization_stuff.png)
+
+| Passo | O que faz |
+|-------|-----------|
+| `RecursiveCharacterTextSplitter` | Divide o texto em chunks menores |
+| `load_summarize_chain` | Carrega a chain com `chain_type="stuff"` |
+| `invoke({"input_documents": parts})` | Passa a lista de docs para o modelo processar de uma vez |
+
+---
+
+## 6. Sumarização Map-Reduce
+**Script:** `chains-e-processamentos/sumarizacao_map_reduce copy.py`
+
+Divide o texto em partes, resume cada uma individualmente (Map) e depois condensa os resumos em um final (Reduce). Ideal para documentos longos.
+
+![Sumarização Map-Reduce](mermaid-diagrams/map_reduce_summarization.png)
+
+| Passo | O que faz |
+|-------|-----------|
+| `Map Step` | Cada chunk é resumido independentemente pelo modelo |
+| `Reduce Step` | A LLM recebe todos os resumos intermediários e cria a síntese final |
+| `load_summarize_chain` | Configurada com `chain_type="map_reduce"` |
