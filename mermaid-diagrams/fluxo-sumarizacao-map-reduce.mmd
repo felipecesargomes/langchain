@@ -1,0 +1,19 @@
+graph TD
+    A[Texto Longo] --> B[RecursiveCharacterTextSplitter]
+    B --> C1[Documento 1]
+    B --> C2[Documento 2]
+    B --> Cn[Documento n]
+
+    subgraph "Map Stage"
+        C1 --> D1[Prompt Map] --> E1[LLM] --> F1[Resumo 1]
+        C2 --> D2[Prompt Map] --> E2[LLM] --> F2[Resumo 2]
+        Cn --> Dn[Prompt Map] --> En[LLM] --> Fn[Resumo n]
+    end
+
+    F1 --> G[Reduce Stage: Combinar Resumos]
+    F2 --> G
+    Fn --> G
+
+    G --> H[Prompt Reduce]
+    H --> I[LLM]
+    I --> J[Resumo Final]
