@@ -111,7 +111,7 @@ parts = splitter.create_documents([long_text])
 
 llm = ChatOpenAI(model_name="gpt-4", temperature=0)
 
-chain_summarize = load_summarize_chain(llm, chain_type="map_reduce", verbose=True)
+chain_summarize = load_summarize_chain(llm, chain_type="map_reduce", verbose=False)
 
 output_path = Path(__file__).with_name("resumo_summarizacao.txt")
 
