@@ -88,7 +88,7 @@ Dois templates encadeados: traduz texto PT→EN via `translate` chain, depois re
 
 Usa a estratégia `stuff`, que coloca todos os pedaços de documentos em um único prompt. Indicado para textos curtos.
 
-![Sumarização Stuff](mermaid-diagrams/text_summarization_stuff.png)
+![Sumarização Stuff]
 
 ```mermaid
 graph TD
