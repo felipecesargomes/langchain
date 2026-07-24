@@ -117,8 +117,6 @@ graph TD
 
 Divide o texto em partes, resume cada uma individualmente (Map) e depois condensa os resumos em um final (Reduce). Ideal para documentos longos.
 
-![Sumarização Map-Reduce](mermaid-diagrams/map_reduce_summarization.png)
-
 ```mermaid
 graph TD
     A[Texto Longo] --> B[RecursiveCharacterTextSplitter]
